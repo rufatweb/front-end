@@ -30,3 +30,41 @@
     transform: rotate(360deg);
   }
 }
+.nav-bar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+}
+.nav-bar li {
+  float: left;
+  display: block;
+  color: #f2f2f9;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.nav-bar li:hover {
+  background: #ddd;
+  color: black;
+}
+
+.home, .item-contariner {
+  margin-top: 80px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.display {
+  width: 50%;
+  position: relative;
+  right: 30px;
+}
+.card {
+  margin-top: 10px;
+}
+
+.item-contariner {
+  margin-left: auto;
+  margin-right: auto;
+}
