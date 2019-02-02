@@ -35,4 +35,5 @@ let filtered = [...this.state.items].filter(item => item.attributes.name.toLower
     )
   }
 }
+
 export default ItemListContainer;

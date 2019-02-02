@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Image } from 'semantic-ui-react'
 import { Button, Header, Modal } from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 class ItemCard extends React.Component {
@@ -25,8 +26,8 @@ handleClick = () => {
       <Modal.Description>
         <Header>{this.props.item.attributes.name}</Header>
         <p>${this.props.item.attributes.price}</p>
-        <Button onClick={this.handleClick}>{(!this.state.addToBag)? <div>ADD TO BAG</div> : <div>ADDED TO BAG</div> }</Button><p></p>
-        {(this.state.addToBag) ? <Link to="/"><Button>Continue to shopping</Button></Link>: null}
+        {(!this.state.addToBag)? <Button color="orange" onClick={this.handleClick}>ADD TO BAG</Button> : <Button>ADDED TO BAG <Icon color="green" disabled name='check' /> </Button>}<p></p>
+        {(this.state.addToBag) ? <Link to="/"><Button color="orange">CONTUNE SHOPPING</Button></Link>: null}
       </Modal.Description>
     </Modal.Content>
   </Modal>
