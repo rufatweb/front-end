@@ -52,8 +52,7 @@
 
 .home, .item-contariner {
   margin-top: 80px;
-  margin-left: auto;
-  margin-right: auto;
+
 }
 .display {
   width: 50%;
@@ -61,10 +60,12 @@
   right: 30px;
 }
 .card {
-  margin-top: 10px;
+
+  margin-top: 30px;
 }
 
 .item-contariner {
+  width: 30%;
   margin-left: auto;
   margin-right: auto;
 }

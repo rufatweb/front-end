@@ -10,11 +10,12 @@ class ItemCard extends React.Component {
 
     return(
       <div className="card">
-   <Image size='small' src={this.props.item.attributes.image} onClick={() => this.props.handleDisplay(this.props.item)}/>
+   <Image size='medium' src={this.props.item.attributes.image} onClick={() => this.props.handleDisplay(this.props.item)}/>
+   <p></p>
    <Modal trigger={<Button>See more</Button>}>
     <Modal.Header>{this.props.item.attributes.name}</Modal.Header>
     <Modal.Content image>
-      <Image size='large' src={this.props.item.attributes.image} />
+      <Image wrapped size='medium' size='large' src={this.props.item.attributes.image} />
       <Modal.Description>
         <Header>{this.props.item.attributes.name}</Header>
         <p>${this.props.item.attributes.price}</p>
