@@ -23,12 +23,12 @@ handleDisplay = (item) => {
 
 
   render () {
-// let filtered = [...this.state.items].filter(item => item.name.toLowerCase().includes(this.props.searchTerm.toLowerCase()))
+let filtered = [...this.state.items].filter(item => item.attributes.name.toLowerCase().includes(this.props.searchTerm.toLowerCase()))
     return (
     <div className="item-contariner">
-    <Grid.Column >
-    {this.state.items.map(item => <ItemCard handleDisplay={this.handleDisplay} key={item.id} item={item}/> )}
-    </Grid.Column >
+    <div class="ui four column grid">
+    {filtered.map(item => <ItemCard user={this.props.user} newUser={this.props.newUser}handleDisplay={this.handleDisplay} key={item.id} item={item}/> )}
+    </div>
 
     </div>
     )

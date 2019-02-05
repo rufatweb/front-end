@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Link } from 'react-router-dom';
 import { Button, Form } from 'semantic-ui-react'
 
 class LogIn extends React.Component {
@@ -23,6 +24,7 @@ handleChange = (e) => {
 render () {
   return (
     <div className="sign-in">
+    <h1 color='orange'>Please log in</h1>
     <Form onSubmit={this.handleSubmit}>
      <Form.Field>
        <label>user name</label>
@@ -34,6 +36,8 @@ render () {
      </Form.Field>
      <Button type='submit'>Log In</Button>
    </Form>
+  <h3>Need an account?</h3>
+  <Link to="/sign_up"><Button color="orange">Sign Up</Button></Link>
     </div>
   )
 }

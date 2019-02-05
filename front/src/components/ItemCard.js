@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Button, Header, Modal, Icon, Image } from 'semantic-ui-react'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class ItemCard extends React.Component {
 
@@ -11,6 +11,22 @@ state = {
 
 handleClick = () => {
   this.setState({addToBag: !this.state.addToBag})
+}
+
+renderButtons = () => {
+  if (!this.state.addToBag) {
+    return <Button color="orange" onClick={this.handleClick}>ADD TO BAG</Button>
+  } else if (this.state.addToBag && (this.props.user || this.props.newUser)){
+    return (
+      <div>
+          <Button>ADDED TO BAG <Icon color="green" disabled name='check' /> </Button><p></p>
+           <Link to="/"><Button color="orange">CONTUNE SHOPPING</Button></Link>
+           </div>
+         )
+  } else {
+    return <Redirect to="/log_in" />
+  }
+
 }
   render () {
 
@@ -25,8 +41,9 @@ handleClick = () => {
       <Modal.Description>
         <Header>{this.props.item.attributes.name}</Header>
         <p>${this.props.item.attributes.price}</p>
-        {(!this.state.addToBag)? <Button color="orange" onClick={this.handleClick}>ADD TO BAG</Button> : <Button>ADDED TO BAG <Icon color="green" disabled name='check' /> </Button>}<p></p>
-        {(this.state.addToBag) ? <Link to="/"><Button color="orange">CONTUNE SHOPPING</Button></Link>: null}
+       {this.renderButtons()}
+
+
       </Modal.Description>
     </Modal.Content>
   </Modal>
