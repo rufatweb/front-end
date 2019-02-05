@@ -15,7 +15,10 @@ return (
   </Link>
   <Input icon='search' value={props.value} onChange={(e) => props.handleSearch(e)} placeholder='Search...' />
   <Link to="/sign_up">
-  <li>Log In/Sign Up</li>
+  <li>Sign Up</li>
+  </Link>
+  <Link to="/log_in">
+  <li>Log In</li>
   </Link>
   </ul>
     </div>
