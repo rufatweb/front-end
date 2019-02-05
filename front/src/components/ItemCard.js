@@ -1,8 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Image } from 'semantic-ui-react'
-import { Button, Header, Modal } from 'semantic-ui-react'
-import { Icon } from 'semantic-ui-react'
+import { Button, Header, Modal, Icon, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 class ItemCard extends React.Component {
@@ -10,6 +8,7 @@ class ItemCard extends React.Component {
 state = {
   addToBag: ''
 }
+
 handleClick = () => {
   this.setState({addToBag: !this.state.addToBag})
 }

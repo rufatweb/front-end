@@ -14,7 +14,7 @@ return (
   <li>Collection</li>
   </Link>
   <Input icon='search' value={props.value} onChange={(e) => props.handleSearch(e)} placeholder='Search...' />
-  <Link to="/sign_in">
+  <Link to="/sign_up">
   <li>Log In/Sign Up</li>
   </Link>
   </ul>
