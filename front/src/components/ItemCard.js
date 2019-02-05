@@ -16,7 +16,7 @@ handleClick = () => {
 renderButtons = () => {
   if (!this.state.addToBag) {
     return <Button color="orange" onClick={this.handleClick}>ADD TO BAG</Button>
-  } else if (this.state.addToBag && (this.props.user || this.props.newUser)){
+  } else if (this.state.addToBag && this.props.user){
     return (
       <div>
           <Button>ADDED TO BAG <Icon color="green" disabled name='check' /> </Button><p></p>

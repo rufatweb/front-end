@@ -10,7 +10,6 @@ class App extends Component {
 
   state = {
     searchTerm: '',
-    newUser: null,
     user: null
   }
 
@@ -52,7 +51,7 @@ class App extends Component {
     }).then(r => r.json())
     .then(json => {
       localStorage.setItem("token", json.jwt)
-      this.setState({newUser: json.user})
+      this.setState({user: json.user})
     })
  }
 handleLogIn = (loginData) => {
@@ -86,18 +85,18 @@ getUser = (loginData) => {
 
 logout = () => {
   localStorage.clear()
-  this.setState({user: null, newUser: null})
+  this.setState({user: null})
   this.props.history.push('/');
 }
   render() {
     return (
       <div className="App">
-      <NavBar logout={this.logout} user={this.state.user} newUser={this.state.newUser} value={this.state.searchTerm} handleSearch={this.handleSearch} />
+      <NavBar logout={this.logout} user={this.state.user}  value={this.state.searchTerm} handleSearch={this.handleSearch} />
       <Switch>
-      <Route path="/collection" render={() => <ItemListContainer newUser={this.state.newUser} user={this.state.user} searchTerm={this.state.searchTerm}/>} />
+      <Route path="/collection" render={() => <ItemListContainer  user={this.state.user} searchTerm={this.state.searchTerm}/>} />
       <Route path="/log_in" render={() => <LogIn handleLogIn={this.handleLogIn}/>}/>
       <Route path="/sign_up" render={() => <SignUp handleSignUpSubmit={this.handleSignUpSubmit} />}/>
-      <Route path="/" render={() => <Home newUser={this.state.user}/>} />
+      <Route path="/" render={() => <Home user={this.state.user}/>} />
 
       </Switch>
 
