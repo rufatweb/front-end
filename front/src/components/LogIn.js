@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom';
 import { Button, Form } from 'semantic-ui-react'
 
@@ -27,11 +26,11 @@ render () {
     <h1 color='orange'>Please log in</h1>
     <Form onSubmit={this.handleSubmit}>
      <Form.Field>
-       <label>user name</label>
+
        <input type='text' name='username' value={this.state.username} placeholder='username' onChange={this.handleChange} />
      </Form.Field>
      <Form.Field>
-     <label>password</label>
+
      <input type='password' name='password' value={this.state.password} placeholder='password' onChange={this.handleChange} />
      </Form.Field>
      <Button type='submit'>Log In</Button>

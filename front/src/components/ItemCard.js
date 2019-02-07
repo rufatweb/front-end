@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { Button, Header, Modal, Icon, Image } from 'semantic-ui-react'
 import { Link, Redirect } from 'react-router-dom';
 
@@ -11,6 +10,7 @@ state = {
 
 handleClick = () => {
   this.setState({addToBag: !this.state.addToBag})
+  this.props.handleCart(this.props.item)
 }
 
 renderButtons = () => {
@@ -32,7 +32,7 @@ renderButtons = () => {
 
     return(
       <div className="card">
-   <Image size='medium' src={this.props.item.attributes.image} onClick={() => this.props.handleDisplay(this.props.item)}/>
+   <Image className="img" size='medium' src={this.props.item.attributes.image} onClick={() => this.props.handleDisplay(this.props.item)}/>
    <p></p>
    <Modal trigger={<Button>See more</Button>}>
     <Modal.Header>{this.props.item.attributes.name}</Modal.Header>

@@ -1,8 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import ItemCard from '../components/ItemCard'
-import Display from '../components/Display'
-import { Button, Header, Image, Modal, Grid } from 'semantic-ui-react'
 
 class ItemListContainer extends React.Component {
 
@@ -22,12 +19,13 @@ handleDisplay = (item) => {
 
 
 
+
   render () {
 let filtered = [...this.state.items].filter(item => item.attributes.name.toLowerCase().includes(this.props.searchTerm.toLowerCase()))
     return (
     <div className="item-contariner">
-    <div class="ui four column grid">
-    {filtered.map(item => <ItemCard user={this.props.user} handleDisplay={this.handleDisplay} key={item.id} item={item}/> )}
+    <div className="ui four column grid">
+    {filtered.map(item => <ItemCard handleCart={this.props.handleCart} user={this.props.user} handleDisplay={this.handleDisplay} key={item.id} item={item}/> )}
     </div>
 
     </div>
