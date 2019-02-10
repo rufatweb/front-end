@@ -6,7 +6,7 @@ import ItemListContainer from './containers/ItemListContainer'
 import {Route, Switch, withRouter} from 'react-router-dom'
 import LogIn from './components/LogIn'
 import SignUp from './components/SignUp'
-import Cart from './components/Cart'
+import Cart from './containers/Cart'
 class App extends Component {
 
   state = {
@@ -27,7 +27,9 @@ class App extends Component {
         }
       })
         .then(r => r.json())
-        .then(json => this.setState({ user: json.user, cart: json.user.items}))
+        .then(json => {
+          this.setState({ user: json.user, cart: json.user.user_items})
+        })
     } else {
       this.props.history.push('/login');
     }
@@ -53,7 +55,7 @@ class App extends Component {
     }).then(r => r.json())
     .then(json => {
       localStorage.setItem("token", json.jwt)
-      this.setState({user: json.user})
+      this.setState({user: json.user, cart: json.user.user_items})
     })
  }
 handleLogIn = (loginData) => {
@@ -90,38 +92,63 @@ logout = () => {
 }
 
 handleCart = (item) => {
-  // debugger
-  console.log(item);
+  let token= localStorage.getItem("token")
   fetch('http://localhost:3000/api/v1/user_items', {
     method: 'POST',
     headers: {
      'Content-Type': 'application/json',
-        "Accepts": "application/json"
+        "Accepts": "application/json",
+        "Authorization": `${token}`
       },
       body: JSON.stringify({
         user_id: this.state.user.id,
-        item_id: item.id,
-        quantity: 1
+        item_id: item.id
       })})
       .then(r => r.json())
-      .then(data => {
-        console.log(data.user_item)
-        let newArr = [...this.state.cart, data.user_item]
-        console.log(newArr)
-        this.setState({cart: newArr})
-      }
-      )
+      .then(res => this.setState({cart: this.state.user.user_items}))
     }
 
+    handlePlus = (item, minus) => {
+      let token= localStorage.getItem("token")
+      let newQuantity;
+      (minus) ? newQuantity = item.quantity - 1 : newQuantity = item.quantity + 1
+      return fetch(`http://localhost:3000/api/v1/user_items/${item.id}`, {
+  method: 'PATCH',
+  body: JSON.stringify({quantity: newQuantity}),
+  headers:{
+    'Accepts': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': `${token}`
+  }
+}).then(res => res.json())
+.then(r => {
+  let newArr = [...this.state.cart]
+  let oldItem = newArr.find(item => item.id.toString() === r.data.id)
+  let idx = [...this.state.cart].indexOf(oldItem)
+  newArr[idx]=oldItem
+  this.setState({cart: newArr})
+})
+    }
+
+handleDelete = (item) => {
+  let token = localStorage.getItem("token")
+  console.log(token)
+  fetch(`http://localhost:3000/api/v1/user_items/${item.id}`, {
+     method: 'DELETE'
+   }, headers: {
+     'Authorization': `${token}`
+   }).then(res => res.json())
+   .then(console.log)
+}
 
   render() {
-    console.log(this.state.cart)
+
     return (
       <div className="App">
       <NavBar logout={this.logout} user={this.state.user}  value={this.state.searchTerm} handleSearch={this.handleSearch} />
       <Switch>
-      <Route path="/collection" render={() => <ItemListContainer handleCart={this.handleCart} user={this.state.user} searchTerm={this.state.searchTerm}/>} />
-      <Route path="/cart" render={() => <Cart cart={this.state.cart}/>} />
+      <Route path="/collection" render={() => <ItemListContainer cart={this.state.cart} handleCart={this.handleCart} user={this.state.user} searchTerm={this.state.searchTerm}/>} />
+      <Route path="/cart" render={() => <Cart handleDelete={this.handleDelete} handlePlus={this.handlePlus} cart={this.state.cart}/>} />
       <Route path="/log_in" render={() => <LogIn handleLogIn={this.handleLogIn}/>}/>
       <Route path="/sign_up" render={() => <SignUp handleSignUpSubmit={this.handleSignUpSubmit} />}/>
       <Route path="/" render={() => <Home user={this.state.user}/>} />
