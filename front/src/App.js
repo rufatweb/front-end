@@ -11,7 +11,7 @@ class App extends Component {
 
   state = {
     searchTerm: '',
-    user: null,
+    user: '',
     cart: []
   }
 
@@ -107,11 +107,11 @@ handleCart = (item) => {
       })})
       .then(r => r.json())
       .then(res => {
+        console.log(res)
         let obj = res.data.attributes
         obj.id = res.data.id.toString()
         let newArr = [...this.state.cart, obj]
         this.setState({cart: newArr})
-
       })
     }
 

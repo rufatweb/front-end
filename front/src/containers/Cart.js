@@ -19,7 +19,7 @@ render() {
    </div>
    <p></p>
    <p></p>
-     {(this.props.cart.length !== 0)? <span>Subtotal: {this.subTotal()} <p></p><Button color="orange">PLACE YOUR ORDER</Button> </span>: <h1>YOUR CART IS EMPTY</h1>}
+     {(this.props.cart.length !== 0)? <span>Subtotal: ${this.subTotal()} <p></p><Button color="black">PLACE YOUR ORDER</Button> </span>: <h1>YOUR CART IS EMPTY</h1>}
    </div>
  )
   }
