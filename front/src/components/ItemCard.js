@@ -24,7 +24,7 @@ handleClick = () => {
     if (this.props.IdsInBag.includes(this.props.item.id)) {
       return (
         <div>
-        <h2>IT APPEARS YOU ALREADY HAVE THIS ITEM IN YOUR CART</h2>
+        <h2>LOOKS LIKE YOU ALREADY HAVE THIS ITEM IN YOUR CART</h2>
         <Link to="/cart"><Button color="orange">CHECK YOUR CART</Button></Link>
       </div>
     )
@@ -53,7 +53,6 @@ handleClick = () => {
 }
   render () {
 
-console.log(typeof(this.props.IdsInBag[0]))
     return(
       <div className="card">
    <Image className="img" size='medium' src={this.props.item.attributes.image} onClick={() => this.props.handleDisplay(this.props.item)}/>
@@ -65,7 +64,7 @@ console.log(typeof(this.props.IdsInBag[0]))
       <Modal.Description>
         <Header>{this.props.item.attributes.name}</Header>
         <p>${this.props.item.attributes.price}</p>
-        {(this.props.user) ? this.checkBag() : this.renderButtons()}
+       {this.renderButtons()}
       </Modal.Description>
     </Modal.Content>
   </Modal>

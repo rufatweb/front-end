@@ -18,6 +18,7 @@ class App extends Component {
   componentDidMount() {
     let token= localStorage.getItem("token")
     if (token) {
+
       fetch('http://localhost:3000/api/v1/current_user', {
         method: "GET",
         headers: {
@@ -87,7 +88,7 @@ getUser = (loginData) => {
 
 logout = () => {
   localStorage.clear()
-  this.setState({user: null, cart: []})
+  this.setState({user: null})
   this.props.history.push('/');
 }
 
@@ -105,7 +106,13 @@ handleCart = (item) => {
         item_id: item.id
       })})
       .then(r => r.json())
-      .then(res => this.setState({cart: this.state.user.user_items}))
+      .then(res => {
+        let obj = res.data.attributes
+        obj.id = res.data.id.toString()
+        let newArr = [...this.state.cart, obj]
+        this.setState({cart: newArr})
+
+      })
     }
 
     handlePlus = (item, minus) => {
@@ -122,23 +129,34 @@ handleCart = (item) => {
   }
 }).then(res => res.json())
 .then(r => {
+  let newItem = r.data.attributes
+  newItem.id = r.data.id.toString()
   let newArr = [...this.state.cart]
-  let oldItem = newArr.find(item => item.id.toString() === r.data.id)
+  let oldItem = newArr.find(item => item.id.toString() === r.data.id.toString())
   let idx = [...this.state.cart].indexOf(oldItem)
-  newArr[idx]=oldItem
+  newArr[idx]=newItem
   this.setState({cart: newArr})
 })
-    }
+}
 
 handleDelete = (item) => {
   let token = localStorage.getItem("token")
-  console.log(token)
   fetch(`http://localhost:3000/api/v1/user_items/${item.id}`, {
-     method: 'DELETE'
-   }, headers: {
+     method: 'DELETE',
+    headers: {
      'Authorization': `${token}`
-   }).then(res => res.json())
-   .then(console.log)
+   }
+ })
+ .then(r => {
+
+   let newArr = [...this.state.cart]
+   let oldItem = newArr.find(user_item => user_item.id.toString() === item.id.toString())
+   let idx = [...this.state.cart].indexOf(oldItem)
+   newArr.splice(idx, 1)
+   this.setState({cart: newArr})
+
+ })
+
 }
 
   render() {
