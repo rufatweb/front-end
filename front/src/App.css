@@ -33,8 +33,9 @@
 .nav-bar {
   overflow: hidden;
   background-color: #333;
-  position: fixed; /* Set the navbar to fixed position */
-  top: 0; /* Position the navbar at the top of the page */
+  /* Set the navbar to fixed position */
+  top: 0;
+  z-index: 5;
   width: 100%; /* Full width */
 }
 .nav-bar li {

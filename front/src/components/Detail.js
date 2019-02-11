@@ -23,7 +23,7 @@ render() {
    <span>Quantity:{this.props.user_item.quantity}</span>
    <p></p>
    {(this.props.user_item.quantity !== 1)? <span><Button onClick={() => this.props.handlePlus(this.props.user_item)}>+</Button><Button onClick={() => this.props.handlePlus(this.props.user_item, "minus")}>-</Button> </span> :
-   <span><Button onClick={() => this.props.handlePlus(this.props.user_item)}>+</Button> <Button onClick={() => this.props.handleDelete(this.props.user_item)}>remove item</Button></span>}
+   <span><Button onClick={() => this.props.handlePlus(this.props.user_item)}>+</Button> <Button onClick={() => this.props.handleDelete(this.props.user_item)}>remove</Button></span>}
 
    </div>
  )
