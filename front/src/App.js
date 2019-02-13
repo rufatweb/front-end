@@ -7,6 +7,8 @@ import {Route, Switch, withRouter} from 'react-router-dom'
 import LogIn from './components/LogIn'
 import SignUp from './components/SignUp'
 import Cart from './containers/Cart'
+import Checkout from './components/Checkout'
+
 class App extends Component {
 
   state = {
@@ -83,13 +85,13 @@ getUser = (loginData) => {
 } )
   .then(json => {
     localStorage.setItem("token", json.jwt)
-    this.setState({user: json.user})
+    this.setState({user: json.user, cart: json.user.user_items})
   })
 }
 
 logout = () => {
   localStorage.clear()
-  this.setState({user: null})
+  this.setState({user: '', cart: []})
   this.props.history.push('/');
 }
 
@@ -108,7 +110,6 @@ handleCart = (item) => {
       })})
       .then(r => r.json())
       .then(res => {
-        console.log(res)
         let obj = res.data.attributes
         obj.id = res.data.id.toString()
         let newArr = [...this.state.cart, obj]
@@ -155,9 +156,25 @@ handleDelete = (item) => {
    let idx = [...this.state.cart].indexOf(oldItem)
    newArr.splice(idx, 1)
    this.setState({cart: newArr})
-
  })
+}
 
+handleCheckout = (subTotal) => {
+  let token= localStorage.getItem("token")
+  console.log(subTotal)
+  fetch('http://localhost:3000/api/v1/orders', {
+    method: 'POST',
+    headers: {
+     'Content-Type': 'application/json',
+        "Accepts": "application/json",
+        "Authorization": `${token}`
+      },
+      body: JSON.stringify({
+        user_id: this.state.user.id,
+        subtotal: subTotal
+      })})
+      .then(r => r.json())
+      .then(console.log)
 }
 
   render() {
@@ -167,7 +184,9 @@ handleDelete = (item) => {
       <NavBar logout={this.logout} user={this.state.user}  value={this.state.searchTerm} handleSearch={this.handleSearch} />
       <Switch>
       <Route path="/collection" render={() => <ItemListContainer cart={this.state.cart} handleCart={this.handleCart} user={this.state.user} searchTerm={this.state.searchTerm}/>} />
-      <Route path="/cart" render={() => <Cart handleDelete={this.handleDelete} handlePlus={this.handlePlus} cart={this.state.cart}/>} />
+      <Route path="/cart" render={() => <Cart handleCheckout={this.handleCheckout} handleDelete={this.handleDelete} handlePlus={this.handlePlus} cart={this.state.cart}/>} />
+      <Route path="/checkout" render={() => <Checkout />} />
+
       <Route path="/log_in" render={() => <LogIn handleLogIn={this.handleLogIn}/>}/>
       <Route path="/sign_up" render={() => <SignUp handleSignUpSubmit={this.handleSignUpSubmit} />}/>
       <Route path="/" render={() => <Home user={this.state.user}/>} />

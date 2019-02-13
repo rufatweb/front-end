@@ -1,5 +1,6 @@
 import React from 'react'
-
+import YoutubeBackground from 'react-youtube-background'
+import { Advertisement } from 'semantic-ui-react'
 
 const Home = (props) => {
 
@@ -7,10 +8,22 @@ const Home = (props) => {
 
 return (
   <div className="home" >
-  <div size="small" unit='leaderboard' test='Leaderboard'data-text="Advertisment"><img alt="ad" src="https://cdn3.sportngin.com/attachments/photo/1262/0249/AdPanel_JammersGearBanner.jpg"/></div>
-  <p></p>
-  <div unit='small rectangle' test='small Rectangle'  data-text="Advertisment"> <img alt="ad" src="https://nice-assets-3.s3-accelerate.amazonaws.com/smart_templates/5e5e0d93353e3fb9ccc764c95d3dd333/assets/preview_7d1ba3183cdb9ec4a44dc01edeae773c.jpg"/></div>
-  </div>
+  <YoutubeBackground
+  videoId={"DCNLj61JCQ4"}
+  aspectRatio={"16:9"}
+  overlay={"rgba(0,0,0,.4)"}
+  className={"video-background"}
+  >
+<Advertisement  unit='top banner' test='Top Banner' />
+</YoutubeBackground>
+<div class="ui wide skyscraper test ad" data-text=" "><a href="/"><img src="https://static.skillshare.com/uploads/parentClasses/4c16e4daa75e1f1af7d7a3c1ff5c436b/f1210e8b"/></a></div>
+
+<div>
+<div class="ui large rectangle test ad one" data-text=" "><a href="/"><img src="https://pointsprizes-blog.s3-accelerate.amazonaws.com/4.png"/></a></div>
+<div class="ui large rectangle test ad two" data-text=" "><a href="/collection"><img src="https://www.design4nails.co.uk/wp-content/uploads/2017/03/NEW-ARRIVALS.png"/></a></div>
+</div>
+
+</div>
 )
 }
 

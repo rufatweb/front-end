@@ -76,7 +76,7 @@ handleClick = () => {
 
     return(
       <div className="card">
-   <Image className="img" size='medium' src={this.props.item.attributes.image} onClick={() => this.props.handleDisplay(this.props.item)}/>
+   <Image className="img" size='medium' src={this.props.item.attributes.image}/>
    <p></p>
    <Modal trigger={<Button color="black" animated='vertical'> <Button.Content visible>See more</Button.Content><Button.Content hidden><Icon name='eye' /> </Button.Content> </Button>}>
     <Modal.Header>{this.props.item.attributes.name}</Modal.Header>
