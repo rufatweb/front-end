@@ -131,3 +131,21 @@ z-index: -99;
 .quantity {
   margin-top: 20px;
 }
+
+.order {
+  border: black solid 1px;
+  padding: 5px;
+}
+
+
+.payment, .end {
+  width: 30%;
+  height: 300px;
+  border: black solid 1px;
+  margin: auto;
+}
+
+.end {
+  margin-top: 150px;
+  padding: 40px;
+}

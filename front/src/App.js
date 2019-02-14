@@ -7,6 +7,7 @@ import {Route, Switch, withRouter} from 'react-router-dom'
 import LogIn from './components/LogIn'
 import SignUp from './components/SignUp'
 import Cart from './containers/Cart'
+import End from './components/End'
 import Checkout from './components/Checkout'
 
 class App extends Component {
@@ -14,7 +15,10 @@ class App extends Component {
   state = {
     searchTerm: '',
     user: '',
-    cart: []
+    cart: [],
+    orderSubTotal: '',
+    orderItems: []
+
   }
 
   componentDidMount() {
@@ -161,7 +165,7 @@ handleDelete = (item) => {
 
 handleCheckout = (subTotal) => {
   let token= localStorage.getItem("token")
-  console.log(subTotal)
+
   fetch('http://localhost:3000/api/v1/orders', {
     method: 'POST',
     headers: {
@@ -174,7 +178,7 @@ handleCheckout = (subTotal) => {
         subtotal: subTotal
       })})
       .then(r => r.json())
-      .then(console.log)
+      .then(data => this.setState({orderSubTotal: data.order.subtotal, orderItems: data.order_items}))
 }
 
   render() {
@@ -185,8 +189,8 @@ handleCheckout = (subTotal) => {
       <Switch>
       <Route path="/collection" render={() => <ItemListContainer cart={this.state.cart} handleCart={this.handleCart} user={this.state.user} searchTerm={this.state.searchTerm}/>} />
       <Route path="/cart" render={() => <Cart handleCheckout={this.handleCheckout} handleDelete={this.handleDelete} handlePlus={this.handlePlus} cart={this.state.cart}/>} />
-      <Route path="/checkout" render={() => <Checkout />} />
-
+      <Route path="/checkout" render={() => <Checkout orderItems={this.state.orderItems} orderSubTotal={this.state.orderSubTotal}/>} />
+      <Route path="/ordered" render={() => <End user={this.state.user}/>} />
       <Route path="/log_in" render={() => <LogIn handleLogIn={this.handleLogIn}/>}/>
       <Route path="/sign_up" render={() => <SignUp handleSignUpSubmit={this.handleSignUpSubmit} />}/>
       <Route path="/" render={() => <Home user={this.state.user}/>} />

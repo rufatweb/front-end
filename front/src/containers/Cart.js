@@ -14,8 +14,8 @@ listItems = () => this.props.cart.map(user_item => <Detail handleDelete={this.pr
 
 
 render() {
-  let subTotal = this.props.cart.map(user_item => parseFloat(user_item.item.price * user_item.quantity)).reduce((a, b) => a + b, 0).toPrecision(4)
-  // let listItems = this.props.cart.map(user_item => <Detail handlePlus={this.props.handlePlus} key={user_item.id} user_item={user_item}/>)
+  let subTotal = this.props.cart.map(user_item => parseFloat(user_item.item.price * user_item.quantity)/100).reduce((a, b) => a + b, 0).toFixed(2)
+
     return (
       <div className="cart">
       <div className="ui four column grid">

@@ -18,15 +18,16 @@ componentDidMount() {
 
 
   render () {
-    
+
 let IdsInBag = this.props.cart.map(user_item => user_item.item.id.toString())
 let filtered = [...this.state.items].filter(item => item.attributes.name.toLowerCase().includes(this.props.searchTerm.toLowerCase()))
     return (
     <div className="item-contariner">
+
     <div className="ui four column grid">
     {filtered.map(item => <ItemCard IdsInBag={IdsInBag} handleCart={this.props.handleCart} user={this.props.user} handleDisplay={this.handleDisplay} key={item.id} item={item}/> )}
     </div>
-
+  
     </div>
     )
   }

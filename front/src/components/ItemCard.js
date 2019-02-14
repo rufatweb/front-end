@@ -84,7 +84,7 @@ handleClick = () => {
       <Image wrapped size='medium' size='large' src={this.props.item.attributes.image} />
       <Modal.Description>
         <Header>{this.props.item.attributes.name}</Header>
-        <p>${this.props.item.attributes.price}0</p>
+        <p>price: ${this.props.item.attributes.price/100}0</p>
        {this.renderButtons()}
       </Modal.Description>
     </Modal.Content>
