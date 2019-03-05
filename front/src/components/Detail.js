@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Header, Modal, Icon, Image } from 'semantic-ui-react'
+import { Button, Header, Modal, Image } from 'semantic-ui-react'
 
 class Detail extends React.Component {
 
@@ -16,10 +16,12 @@ render() {
        <Image wrapped size='medium' src={this.props.user_item.item.image} />
        <Modal.Description>
          <Header>{this.props.user_item.item.name}</Header>
-         <p>${this.props.user_item.item.price}</p>
+
       </Modal.Description>
      </Modal.Content>
    </Modal>
+   <p></p>
+   <p>each: ${this.props.user_item.item.price/100}0</p>
    <span className="quantity" >quantity: {this.props.user_item.quantity}</span>
    <p></p>
    {(this.props.user_item.quantity !== 1)? <span><Button onClick={() => this.props.handlePlus(this.props.user_item)}>+</Button><Button onClick={() => this.props.handlePlus(this.props.user_item, "minus")}>-</Button> </span> :

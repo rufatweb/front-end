@@ -17,9 +17,10 @@ return (
   <Input icon='search' value={props.value} onChange={(e) => props.handleSearch(e)} placeholder='Search...' />
   {(!props.user) ? <Link to="/log_in"><li>Log In</li></Link> : <li onClick={props.logout}>Log Out</li> }
   <Link to="/cart">
-  <li><Icon name="shopping cart"/></li>
+  <li className="shopping-cart"><Icon name="shopping cart"/></li>
   </Link>
   </ul>
+  <span className="cart-number">{props.cart.map(item => item.quantity).reduce((a, b) => a + b, 0)}</span>
     </div>
 )
 

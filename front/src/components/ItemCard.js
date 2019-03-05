@@ -25,7 +25,7 @@ handleClick = () => {
        <div>
        <h2>Looks like you already have this item in your cart</h2>
        <Link to="/cart">
-       <Button color="black" animated='vertical'>
+       <Button color="orange" animated='vertical'>
        <Button.Content visible>CHECK YOUR CART</Button.Content>
        <Button.Content hidden>
         <Icon name='shop' />
@@ -38,7 +38,7 @@ handleClick = () => {
  } else if (!this.state.addToBag) {
       return (
         <div>
-        <Button onClick={this.handleClick} color="black" animated='vertical'>
+        <Button onClick={this.handleClick} color="orange" animated='vertical'>
         <Button.Content visible>ADD TO CART</Button.Content>
         <Button.Content hidden>
          <Icon name='shop' />
@@ -50,7 +50,7 @@ handleClick = () => {
     return (
            <div>
 
-           <Button color="black" animated='vertical'>
+           <Button color="orange" animated='vertical'>
            <Button.Content visible>ADDED TO CART </Button.Content>
            <Button.Content hidden>
             <Icon name='check' />
@@ -58,7 +58,7 @@ handleClick = () => {
         </Button>
         <p></p>
            <Link to="/">
-           <Button color="black" animated>
+           <Button color="orange" animated>
       <Button.Content visible>CONTUNE SHOPPING</Button.Content>
       <Button.Content hidden>
         <Icon name='arrow right' />
@@ -76,21 +76,21 @@ handleClick = () => {
 
     return(
       <div className="card">
-   <Image className="img" size='medium' src={this.props.item.attributes.image}/>
-   <p></p>
-   <Modal trigger={<Button color="black" animated='vertical'> <Button.Content visible>See more</Button.Content><Button.Content hidden><Icon name='eye' /> </Button.Content> </Button>}>
-    <Modal.Header>{this.props.item.attributes.name}</Modal.Header>
+   <Modal className="modal" trigger={<Image className="img" size='medium' src={this.props.item.attributes.image}/>}>
     <Modal.Content image>
       <Image wrapped size='medium' size='large' src={this.props.item.attributes.image} />
       <Modal.Description>
         <Header>{this.props.item.attributes.name}</Header>
         <p>price: ${this.props.item.attributes.price/100}0</p>
-       {this.renderButtons()}
+        <h3>Product Description</h3> <p></p>
+        <p className="lorem"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        {this.renderButtons()}
       </Modal.Description>
     </Modal.Content>
+
+    <p></p>
   </Modal>
-
-
+  <div className="price" >${this.props.item.attributes.price/100}0</div>
       </div>
     )
   }

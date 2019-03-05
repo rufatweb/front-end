@@ -1,12 +1,38 @@
 import React from 'react'
-import { Button, Form, Icon} from 'semantic-ui-react'
-import { Link } from 'react-router-dom';
+import {Elements, StripeProvider} from 'react-stripe-elements';
+import CheckoutForm from '../CheckoutForm'
+import { Button, Icon, Image } from 'semantic-ui-react'
+import { Link, Redirect } from 'react-router-dom';
+
 class Checkout extends React.Component {
 
+state = {
+  complete: false
+}
+
+clear = () => {
+  this.setState({complete: true})
+}
 
 render() {
+if (this.state.complete) return (
+
+  <div className="final">
+
+  <h1>Purchase Complete, Thanks!</h1>
+   <p></p>
+   <Link to="/">
+   <Button color="black" animated>
+   <Button.Content visible>CONTUNE SHOPPING</Button.Content>
+   <Button.Content hidden>
+   <Icon name='arrow right' />
+   </Button.Content>
+   </Button>
+   </Link>
+  </div>
+)
   let numbers = this.props.orderItems.map(item => item.quantity).reduce((a, b) => a + b, 0)
-  console.log(this.props)
+
   return (
     <div >
    <p></p>
@@ -14,24 +40,15 @@ render() {
 
     number of items: {numbers}
     <p></p>
-    total: ${this.props.orderSubTotal}
-    <p></p>
     shipping: Free
     <p></p>
-     <h1>PAYMENT DETAILS</h1>
-   <p></p>
-   <div className="payment">
-   </div>
-   <p></p>
-    <Link to="/ordered">
-    <Button color="black" animated='vertical'>
-<Button.Content visible>PLACE YOUR ORDER</Button.Content>
-<Button.Content hidden>
- <Icon name='dollar' />
-</Button.Content>
-</Button>
-</Link>
-
+    total: ${this.props.orderSubTotal}0
+    <p></p>
+   <StripeProvider apiKey="pk_test_CDMbf0VuaIEAUVyLmStQbZ9x">
+   <Elements>
+   <CheckoutForm reset={this.props.reset} clear={this.clear} amount={this.props.orderSubTotal}/>
+   </Elements>
+   </StripeProvider>
     </div>
   )
 }

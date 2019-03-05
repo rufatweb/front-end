@@ -1,10 +1,9 @@
 import React from 'react'
-import { Button, Header, Modal, Icon, Image } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react'
 import Detail from '../components/Detail'
 import { Link } from 'react-router-dom';
 
 class Cart extends React.Component {
-
 
 
 
@@ -18,12 +17,19 @@ render() {
 
     return (
       <div className="cart">
-      <div className="ui four column grid">
+      <div className="ui column grid">
    {this.listItems()}
    <p></p>
    <p></p>
 
-   {(this.props.cart.length !== 0)? <span><h2>subtotal: $ {subTotal} </h2><p></p><Link to="/checkout"><Button onClick={() => this.props.handleCheckout(subTotal)} color="black">CHECKOUT</Button></Link> </span>: <h1>YOUR SHOPPING CART IS EMPTY<p></p> <Icon name='frown outline' /></h1>}
+   {(this.props.cart.length !== 0)? <div className="checkout-btn"><h2>total: $ {subTotal} </h2><p></p><Link to="/checkout">
+   <Button onClick={() => this.props.handleCheckout(subTotal)} color="orange" animated='vertical'>
+   <Button.Content visible>CHECKOUT</Button.Content>
+   <Button.Content hidden>
+    <Icon name='dollar' />
+  </Button.Content>
+ </Button></Link></div>
+    : <div className="empty"><h1>YOUR SHOPPING CART IS EMPTY<p></p> <Icon name='frown outline' /></h1></div>}
    </div>
    </div>
  )
