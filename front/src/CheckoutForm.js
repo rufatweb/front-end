@@ -17,6 +17,7 @@ handleChange = (e) => {
 
 handleSubmit = async (e) => {
   e.preventDefault();
+  let tokenAuth= localStorage.getItem("token")
   let {token} = await this.props.stripe.createToken({name: this.state.fullName});
   let email = this.state.email
   let amount = (parseFloat(this.state.amount))*100
@@ -24,7 +25,8 @@ handleSubmit = async (e) => {
   fetch('http://localhost:3000/api/v1/charges', {
     method: "POST",
     headers: {
-      'Content-type': 'application/json'
+      'Content-type': 'application/json',
+      "Authorization": `${tokenAuth}`
     },
     body: JSON.stringify({ token, amount, email })
   })
