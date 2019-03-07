@@ -1,5 +1,5 @@
 # T-Shirt Shop
-# A simple eCommerce website for T-shirts. 
+# A basic eCommerce website for T-shirts. 
 + Developed a Rails API backend with endpoints for items and users. 
 + Utilized online payment processing Stripe for a payment part of the website. 
 + Implemented user interface employing React with Semantic UI for styling.
